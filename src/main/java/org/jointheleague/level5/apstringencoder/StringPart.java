@@ -1,8 +1,8 @@
 package org.jointheleague.level5.apstringencoder;
 
 public class StringPart {
-	protected int start;
-	protected int length;
+	protected final int start;
+	protected final int length;
 	/**
 	 * @param start
 	 *            the starting position of the substring in a master string
@@ -26,5 +26,23 @@ public class StringPart {
 	 */
 	public int getLength() { /* implementation not shown */
 		return this.length;
+	}
+
+	@Override
+	public boolean equals(Object arg0) {
+		if (!(arg0 instanceof StringPart)) 
+			return false;
+		if (arg0 == this)
+			return true;
+		
+		StringPart other = (StringPart) arg0;
+		
+		return ((this.getLength() == other.getLength()) &&
+				(this.getStart() == other.getStart()));
+	}
+
+	@Override
+	public int hashCode() {
+		return (41 *(41 + getLength()) + getStart());
 	}
 }
